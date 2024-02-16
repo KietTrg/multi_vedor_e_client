@@ -19,6 +19,23 @@ export const add_friend = createAsyncThunk(
   }
 );
 
+export const send_message = createAsyncThunk(
+  "chat/send_message",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post(
+        "/chat/customer/send-message-to-seller",
+        info
+      );
+      console.log("data: ", data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log("error: ", error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const chatReducer = createSlice({
   name: "chat",
   initialState: {
@@ -33,6 +50,9 @@ export const chatReducer = createSlice({
       state.errorMessage = "";
       state.successMessage = "";
     },
+    updateMessage: (state, { payload }) => {
+      state.friend_messages = [...state.friend_messages, payload];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(add_friend.fulfilled, (state, { payload }) => {
@@ -40,7 +60,21 @@ export const chatReducer = createSlice({
       state.currentFriend = payload.currentFriend;
       state.my_friends = payload.myFriends;
     });
+    builder.addCase(send_message.fulfilled, (state, { payload }) => {
+      let tempFriends = state.my_friends;
+      let index = tempFriends.findIndex(
+        (e) => e.friendId === payload.message.receverId
+      );
+      while (index > 0) {
+        let temp = tempFriends[index];
+        tempFriends[index] = tempFriends[index - 1];
+        tempFriends[index - 1] = temp;
+      }
+      state.my_friends = tempFriends;
+      state.friend_messages = [...state.friend_messages, payload.message];
+      state.successMessage = "message send success";
+    });
   },
 });
-export const { messageClear } = chatReducer.actions;
+export const { messageClear, updateMessage } = chatReducer.actions;
 export default chatReducer.reducer;
