@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import footer from '../assets/footer1.jpg'
 import logo from '../assets/logo_white.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaFacebookF, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { useDispatch, useSelector } from 'react-redux';
+import { get_card, get_wishlists } from '../store/Reducers/cardReducer';
 const Footer = () => {
-    const wishlist_count = 4
-    const card_product_count = 4
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { userInfo } = useSelector(state => state.auth)
+    const { count, wishlist_count } = useSelector(state => state.card)
+    console.log('count: ', count);
+    useEffect(() => {
+        if (userInfo) {
+            dispatch(get_card(userInfo?.id))
+            dispatch(get_wishlists(userInfo?.id))
+        }
+    }, [])
+    // const wishlist_count = 4
+    // const card_product_count = 4
     return (
         <footer>
             <div className=' w-full  md-lg:pb-10 sm:pb-6'>
@@ -95,9 +108,9 @@ const Footer = () => {
                     <div className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
                         <span className='text-xl text-orange-500'><FaFacebookF /></span>
                         {
-                            card_product_count !== 0 && <div className='w-[20px] h-[20px] absolute bg-green-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
+                            count !== 0 && <div className='w-[20px] h-[20px] absolute bg-green-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
                                 {
-                                    card_product_count
+                                    count
                                 }
                             </div>
                         }

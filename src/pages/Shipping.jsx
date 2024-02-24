@@ -14,7 +14,7 @@ const Shipping = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { userInfo } = useSelector(state => state.auth)
-    const { state: { product, price, shipping_fee, items } } = useLocation()
+    const { state: { product, price, shipping_fee, items, oldPrice } } = useLocation()
     // console.log('data: ', data);
     // console.log('state: ', state);
     const [state, setState] = useState({
@@ -173,20 +173,20 @@ const Shipping = () => {
                                 <div className='bg-white font-medium p-5 text-slate-600 flex flex-col gap-3'>
                                     <h2 className='text-xl font-semibold'>Order Summary</h2>
                                     <div className='flex justify-between items-center'>
-                                        <span>Items Total ({items})</span>
-                                        <span>{formatMoney(price)} vnđ</span>
+                                        <span>Price: ({items} items)</span>
+                                        <span>{formatMoney(oldPrice)} vnđ</span>
                                     </div>
-                                    <div className='flex justify-between items-center'>
+                                    {/* <div className='flex justify-between items-center'>
                                         <span>Delivery Fee</span>
                                         <span>{formatMoney(shipping_fee)} vnđ</span>
-                                    </div>
-                                    <div className='flex justify-between items-center'>
+                                    </div> */}
+                                    {/* <div className='flex justify-between items-center'>
                                         <span>Total Payment</span>
-                                        <span>{formatMoney(price + shipping_fee)} vnđ</span>
-                                    </div>
+                                        <span>{formatMoney(price)} vnđ</span>
+                                    </div> */}
                                     <div className='flex justify-between items-center'>
                                         <span>Total</span>
-                                        <span>{formatMoney(price + shipping_fee)} vnđ</span>
+                                        <span>{formatMoney(price)} vnđ</span>
                                     </div>
                                     <button onClick={placeOrder} disabled={res ? false : true} className={`px-5 py-[6px] rounded-sm hover:shadow-orange-500/20 hover:shadow-lg ${res ? 'bg-orange-500' : 'bg-orange-300'} text-sm text-white uppercase`}>Place Order</button>
                                 </div>

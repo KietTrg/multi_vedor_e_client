@@ -37,7 +37,7 @@ const Banner = () => {
                                 className='rounded-md'
                             >
                                 {[1, 2, 3, 4, 5].map((img, i) => <Link key={i} className='  md-lg:h-[440px] h-auto w-full'>
-                                    <img className='rounded-md' src={`http://localhost:3000/images/banner${img}.jpg`} alt="" />
+                                    <img className='rounded-md' src={`http://localhost:3001/images/banner${img}.jpg`} alt="" />
                                 </Link>)}
                             </Carousel>
                         </div>

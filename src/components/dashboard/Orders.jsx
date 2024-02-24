@@ -18,12 +18,12 @@ const Orders = () => {
         console.log('order: ', order);
         let items = 0
         for (let i = 0; i < order.length; i++) {
-            items = order.products[i].quantity + items
+            items = order.products[i]?.quantity + items
             console.log('items: ', items);
         }
         navigate('/payment', {
             state: {
-                price: order.price,
+                price: order?.price,
                 items: items,
                 orderId: order._id
             }
@@ -67,7 +67,7 @@ const Orders = () => {
                                             <span className='bg-green-100 text-green-800 text-sm font-normal mr-2 px-2.5 py-[1px] rounded'>view</span>
                                         </Link>
                                         {
-                                            <span onClick={() => redirect(el)} className='bg-green-100 text-green-800 text-sm font-normal mr-2 px-2.5 py-[1px] rounded cursor-pointer'>Pay Now</span>
+                                            el.paymentStatus !== 'paid' && <span onClick={() => redirect(el)} className='bg-green-100 text-green-800 text-sm font-normal mr-2 px-2.5 py-[1px] rounded cursor-pointer'>Pay Now</span>
                                         }
                                     </td>
                                 </tr>)

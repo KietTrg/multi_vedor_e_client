@@ -37,6 +37,21 @@ const decodeToken = (token) => {
     return userInfo;
   }
 };
+export const change_Password = createAsyncThunk(
+  "auth/change_Password",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    console.log("info: ", info);
+    try {
+      const { data } = await api.post("/customer/change-Password", info);
+      console.log("data: ", data);
+
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log("error: ", error.message);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 export const authReducer = createSlice({
   name: "auth",
   initialState: {
@@ -49,6 +64,9 @@ export const authReducer = createSlice({
     messageClear: (state, _) => {
       state.errorMessage = "";
       state.successMessage = "";
+    },
+    user_reset: (state, _) => {
+      state.userInfo = "";
     },
   },
   extraReducers: (builder) => {
@@ -78,7 +96,19 @@ export const authReducer = createSlice({
       state.successMessage = payload.message;
       state.userInfo = decodeToken(payload.token);
     });
+    builder.addCase(change_Password.pending, (state, _) => {
+      state.loader = true;
+    });
+    builder.addCase(change_Password.rejected, (state, { payload }) => {
+      state.loader = false;
+      state.errorMessage = payload.message;
+    });
+    builder.addCase(change_Password.fulfilled, (state, { payload }) => {
+      state.loader = false;
+
+      state.successMessage = payload.message;
+    });
   },
 });
-export const { messageClear } = authReducer.actions;
+export const { messageClear, user_reset } = authReducer.actions;
 export default authReducer.reducer;

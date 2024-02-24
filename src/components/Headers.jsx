@@ -11,6 +11,7 @@ import { PiShoppingBagOpenDuotone } from "react-icons/pi";
 import { IoIosSearch } from "react-icons/io";
 import { FiPhone } from "react-icons/fi";
 import logo from '../assets/logo.png'
+import { toast } from 'react-hot-toast'
 import { get_card, get_wishlists } from '../store/Reducers/cardReducer'
 
 const Headers = () => {
@@ -58,8 +59,10 @@ const Headers = () => {
         }
     }
     useEffect(() => {
-        dispatch(get_card(userInfo?.id))
-        dispatch(get_wishlists(userInfo?.id))
+        if (userInfo) {
+            dispatch(get_card(userInfo?.id))
+            dispatch(get_wishlists(userInfo?.id))
+        }
     }, [])
     return (
         <div className='w-full bg-white'>
@@ -136,7 +139,7 @@ const Headers = () => {
                                 <div className='flex md-lg:hidden justify-center items-center gap-5'>
                                     <div className='flex justify-center gap-5'>
 
-                                        <div className=' relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] '>
+                                        <div onClick={() => navigate(userInfo ? '/dashboard/my-wishlist' : '/login')} className=' relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] '>
                                             <span ><FaRegHeart size={20} color='#4F6F52' /></span>
                                             <div className='w-[15px] h-[15px] absolute bg-[#4F6F52] rounded-full text-white justify-center items-center text-sm flex -bottom-[-2px] -right-[-2px]'>
                                                 {wishlist_count !== 0 ? wishlist_count : 0}

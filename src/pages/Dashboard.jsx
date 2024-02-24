@@ -4,6 +4,9 @@ import Footer from '../components/Footer'
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { BsList } from 'react-icons/bs'
+import { user_reset } from '../store/Reducers/authReducer'
+import { reset_count } from '../store/Reducers/cardReducer'
+import api from '../api/api'
 const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -14,15 +17,15 @@ const Dashboard = () => {
     const [filterShow, setFilterShow] = useState(false)
 
     const logout = async () => {
-        // try {
-        //     const { data } = await api.get('/customer/logout')
-        //     localStorage.removeItem('customerToken')
-        //     dispatch(user_reset())
-        //     dispatch(reset_count())
-        //     navigate('/login')
-        // } catch (error) {
-        //     console.log(error.response.data)
-        // }
+        try {
+            const { data } = await api.get('/customer/logout')
+            localStorage.removeItem('customerToken')
+            dispatch(user_reset())
+            dispatch(reset_count())
+            navigate('/login')
+        } catch (error) {
+            console.log(error.response.data)
+        }
     }
     return (
         <div>

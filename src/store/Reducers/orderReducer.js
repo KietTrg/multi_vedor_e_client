@@ -19,7 +19,7 @@ export const place_order = createAsyncThunk(
       });
       navigate("/payment", {
         state: {
-          price: price + shipping_fee,
+          price,
           items,
           orderId: data.orderId,
         },

@@ -6,6 +6,8 @@ import product from '../assets/products.jpg'
 import Stripe from '../components/Stripe'
 const Payment = () => {
     const { state: { price, items, orderId } } = useLocation()
+    console.log('orderId: ', orderId);
+    console.log('price: ', price);
     console.log('items: ', items);
     const [paymentMethod, setPaymentMethod] = useState('stripe')
     return (

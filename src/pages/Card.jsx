@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Headers from '../components/Headers'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link, redirect, useNavigate } from 'react-router-dom'
@@ -9,20 +9,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { get_card, delete_card, messageClear, quantity_inc, quantity_dec } from '../store/Reducers/cardReducer'
 import { formatMoney } from '../../src/store/helpers'
 import toast from 'react-hot-toast'
+import { applyCoupon } from '../store/Reducers/couponReducer'
+
+
 const Card = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { userInfo } = useSelector(state => state.auth)
     const { card_products, successMessage, count, price, shipping_fee, outofstock, buyProductItem } = useSelector(state => state.card)
-    console.log('card_products.length: ', card_products.length);
+    const { successMessage: successMessageCoupon, percentCoupon } = useSelector(state => state.coupon)
 
+    console.log('card_products.length: ', card_products.length);
+    const [voucher, setVoucher] = useState('')
     // const card_products = [1, 2, 3]
     // const outofstock = [1, 2]
     const redirect = () => {
         navigate('/shipping', {
             state: {
                 product: card_products,
-                price: price,
+                price: percentCoupon > 0 ? price + shipping_fee - ((price + shipping_fee) * (percentCoupon / 100)) : price + shipping_fee,
+                oldPrice: price,
                 shipping_fee: shipping_fee,
                 items: buyProductItem
             }
@@ -50,6 +56,10 @@ const Card = () => {
         if (temp !== 0) {
             dispatch(quantity_dec(cardId))
         }
+    }
+    const handleApply = () => {
+        // voucher
+        dispatch(applyCoupon({ info: voucher }))
     }
     return (
         <div>
@@ -165,12 +175,16 @@ const Card = () => {
                                             <span>{formatMoney(shipping_fee)} vnđ</span>
                                         </div>
                                         <div className='flex gap-2'>
-                                            <input className='w-full px-3 py-1 outline-0 bg-[#D0E7D2] rounded-md focus:border-[#3a4d39] border' type="text" placeholder='Input voucher' />
-                                            <button className='px-5 py-[1px] bg-[#739072] text-white rounded-md'>Apply</button>
+                                            <input onChange={(e) => setVoucher(e.target.value)} value={voucher} className='w-full px-3 py-1 outline-0 bg-[#D0E7D2] rounded-md focus:border-[#3a4d39] border' type="text" placeholder='Input voucher' />
+                                            <button onClick={handleApply} className='px-5 py-[1px] bg-[#739072] text-white rounded-md'>Apply</button>
                                         </div>
+                                        {percentCoupon > 0 && <div className='flex justify-between items-center'>
+                                            <span>Discount</span>
+                                            <span>{formatMoney(percentCoupon)}%</span>
+                                        </div>}
                                         <div className='flex justify-between items-center'>
                                             <span>Total</span>
-                                            <span className='text-lg text-[#cd8d7a]'>{formatMoney(price + shipping_fee)} vnđ</span>
+                                            <span className='text-lg text-[#cd8d7a]'>{formatMoney((price + shipping_fee) - (price + shipping_fee) * (percentCoupon / 100))} vnđ</span>
                                         </div>
                                         <button onClick={redirect} className='px-5 py-[6px] rounded-md bg-[#739072] text-white hover:bg-[#3a4d39]'>Proceed to checkout {buyProductItem}</button>
                                     </div>
