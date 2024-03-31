@@ -6,13 +6,25 @@ import Categorys from '../components/Categorys'
 import FeatureProducts from '../components/products/FeatureProducts'
 import Products from '../components/products/Products'
 import Footer from '../components/Footer'
-import { get_category, get_products } from '../store/Reducers/homeReducer'
+import { getCoupons, get_category, get_products } from '../store/Reducers/homeReducer'
+import Vouchers from '../components/Vouchers'
+
 const Home = () => {
     const dispatch = useDispatch()
-    const { products, latesProducts, topProducts, saleProducts } = useSelector(state => state.home)
+    const { products, latesProducts, topProducts, saleProducts, coupons } = useSelector(state => state.home)
+    // console.log('coupons: ', coupons);
     useEffect(() => {
-
         dispatch(get_products())
+    }, [])
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            dispatch(getCoupons());
+        }, 5000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+
     }, [])
     return (
         <div className='w-full '>
@@ -20,6 +32,9 @@ const Home = () => {
             <Banner />
             <div className='my-4'>
                 <Categorys />
+            </div>
+            <div className='mt-4'>
+                <Vouchers />
             </div>
             <div className=' py-[45px]'>
                 <FeatureProducts products={products} />

@@ -109,6 +109,19 @@ export const delete_wishlist = createAsyncThunk(
     }
   }
 );
+// export const get_fee = createAsyncThunk(
+//   "car/get_fee",
+//   async (_, { rejectWithValue, fulfillWithValue }) => {
+//     try {
+//       const { data } = await api.get(`/home/product/get-fee`);
+//       console.log("data: ", data);
+//       return fulfillWithValue(data);
+//     } catch (error) {
+//       console.log("error: ", error);
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
 
 export const cardReducer = createSlice({
   name: "card",
@@ -121,6 +134,7 @@ export const cardReducer = createSlice({
     errorMessage: "",
     successMessage: "",
     shipping_fee: 0,
+    // fee: 0,
     outofstock: [],
   },
   reducers: {

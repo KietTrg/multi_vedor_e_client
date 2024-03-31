@@ -3,6 +3,8 @@ import { Link, redirect, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { get_data } from '../../store/Reducers/dashboardReducer'
 import { PiShoppingBagOpenDuotone } from 'react-icons/pi'
+import { FaRegHeart } from 'react-icons/fa'
+import { TbDiscount } from 'react-icons/tb'
 import { formatMoney } from '../../store/helpers'
 const Index = () => {
     const dispatch = useDispatch()
@@ -48,23 +50,23 @@ const Index = () => {
                 <div className='flex justify-center items-center p-5 bg-white shadow-md rounded-md gap-5'>
                     <div className='bg-blue-100 w-[47px] h-[47px] rounded-full flex justify-center items-center text-xl '>
                         <span className='text-xl text-blue-800'>
-                            <PiShoppingBagOpenDuotone />
+                            <FaRegHeart />
                         </span>
                     </div>
                     <div className='flex flex-col justify-start items-start text-slate-600'>
                         <h2 className='text-3xl font-bold'>{pendingOrder}</h2>
-                        <span>Pending Orders</span>
+                        <span>Total WishList</span>
                     </div>
                 </div>
                 <div className='flex justify-center items-center p-5 bg-white shadow-md rounded-md gap-5'>
                     <div className='bg-red-100 w-[47px] h-[47px] rounded-full flex justify-center items-center text-xl '>
                         <span className='text-xl text-red-800'>
-                            <PiShoppingBagOpenDuotone />
+                            <TbDiscount size={25} />
                         </span>
                     </div>
                     <div className='flex flex-col justify-start items-start text-slate-600'>
                         <h2 className='text-3xl font-bold'>{cancelledOrder}</h2>
-                        <span>Cancelled Orders</span>
+                        <span>Total Voucher</span>
                     </div>
                 </div>
             </div>

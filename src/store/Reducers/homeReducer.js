@@ -94,6 +94,32 @@ export const get_review = createAsyncThunk(
     }
   }
 );
+export const getCoupons = createAsyncThunk(
+  "coupon/getCoupons",
+  async (_, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get("/home/getAll-coupon", {
+        withCredentials: true,
+      });
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const addToCoupons = createAsyncThunk(
+  "coupon/addToCoupons",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post("/home/add-to-voucher", info, {
+        withCredentials: true,
+      });
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 export const homeReducer = createSlice({
   name: "home",
   initialState: {
@@ -116,6 +142,8 @@ export const homeReducer = createSlice({
     ratingReview: [],
     errorMessage: "",
     successMessage: "",
+    coupons: [],
+    totalCoupon: 0,
   },
   reducers: {
     messageClear: (state, _) => {
@@ -154,6 +182,16 @@ export const homeReducer = createSlice({
       state.reviews = payload.reviews;
       state.totalReview = payload.totalReview;
       state.ratingReview = payload.ratingReview;
+    });
+    builder.addCase(getCoupons.fulfilled, (state, { payload }) => {
+      state.coupons = payload.coupons;
+      state.totalCoupon = payload.totalCoupon;
+    });
+    builder.addCase(addToCoupons.rejected, (state, { payload }) => {
+      state.errorMessage = payload.error;
+    });
+    builder.addCase(addToCoupons.fulfilled, (state, { payload }) => {
+      state.successMessage = payload.message;
     });
   },
 });

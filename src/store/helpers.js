@@ -1,2 +1,5 @@
 export const formatMoney = (number) =>
-  Number(number?.toFixed(1))?.toLocaleString();
+  Number(number)?.toLocaleString("en", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });

@@ -204,7 +204,7 @@ const Details = () => {
                 <div className='w-[85%] md:w-[85%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-16'>
                     <div className='grid grid-cols-2 md-lg:grid-cols-1 gap-8'>
                         <div>
-                            <div className='p-5 border'>
+                            <div className='px-1'>
                                 <img className='h-[500px] w-full' src={image ? image : product?.images?.[0]} alt="" />
                             </div>
                             <div className='py-3'>
@@ -215,7 +215,7 @@ const Details = () => {
                                     responsive={responsive}
                                 >
                                     {product.images?.map((el, i) => <div className='px-1 cursor-pointer' onClick={() => setImage(el)}>
-                                        <img src={el} alt="" />
+                                        <img className='h-[150px] w-[150px]' src={el} alt="" />
                                     </div>)}
                                 </Carousel>}
                             </div>
@@ -232,9 +232,9 @@ const Details = () => {
                             </div>
                             <div className='text-2xl text-[#CD8D7A] flex gap-2'>{
                                 product?.discount ? <>
-                                    <h2 className=' line-through'>{formatMoney(product?.price)}d</h2>
-                                    <h2>{formatMoney(product.price - Math.floor((product.price * product.discount) / 100))}d (-{product.discount}%)</h2>
-                                </> : <h2>Price: {formatMoney(product.price)}d</h2>
+                                    <h2 className=' line-through'>{formatMoney(product?.price)}đ</h2>
+                                    <h2>{formatMoney(product.price - Math.floor((product.price * product.discount) / 100))}đ (-{product.discount}%)</h2>
+                                </> : <h2>Price: {formatMoney(product.price)}đ</h2>
                             }</div>
                             <div className='text-[#3a4d39]'>
                                 <p>{product.description}</p>

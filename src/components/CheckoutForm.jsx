@@ -13,7 +13,6 @@ const CheckoutForm = ({ orderId }) => {
     }
     const submit = async (e) => {
         e.preventDefault()
-        console.log('e.preventDefault(): ', e.preventDefault());
         if (!stripe || !elements) {
             return
         }

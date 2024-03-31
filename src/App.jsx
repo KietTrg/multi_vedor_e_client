@@ -22,6 +22,8 @@ import ChangePassword from './components/dashboard/ChangePassword';
 import OrderDetail from './components/dashboard/OrderDetail';
 import Chat from './components/dashboard/Chat';
 import ConfirmOrder from './pages/ConfirmOrder';
+import { useLocation } from 'react-router-dom'
+import MyVouchers from './components/dashboard/MyVouchers';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -29,8 +31,13 @@ function App() {
 
   }, [])
 
+  const location = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [location.pathname])
   return (
-    <BrowserRouter>
+    <div>
+
       <Routes>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
@@ -50,6 +57,7 @@ function App() {
             <Route path='my-orders' element={<Orders />}></Route>
             <Route path='order/order-detail/:orderId' element={<OrderDetail />}></Route>
             <Route path='my-wishlist' element={<Wishlist />}></Route>
+            <Route path='my-vouchers' element={<MyVouchers />}></Route>
             <Route path='chat' element={<Chat />}></Route>
             <Route path='chat/:sellerId' element={<Chat />}></Route>
             <Route path='change-password' element={<ChangePassword />}></Route>
@@ -59,7 +67,8 @@ function App() {
 
 
       </Routes>
-    </BrowserRouter>
+
+    </div>
   );
 }
 

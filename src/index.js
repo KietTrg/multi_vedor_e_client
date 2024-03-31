@@ -6,19 +6,22 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import store from "./store/index";
+import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
-    <Toaster
-      toastOptions={{
-        position: "top-center",
-        style: {
-          background: "white",
-          color: "black",
-        },
-      }}
-    />
+    <BrowserRouter>
+      <App />
+      <Toaster
+        toastOptions={{
+          position: "top-center",
+          style: {
+            background: "white",
+            color: "black",
+          },
+        }}
+      />
+    </BrowserRouter>
   </Provider>
 );
 

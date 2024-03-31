@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
 import { formatMoney } from '../../store/helpers'
 const Products = ({ title, products }) => {
+    // console.log('products: ', products);
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
@@ -59,11 +60,11 @@ const Products = ({ title, products }) => {
             >
                 {products.map((el, index) => {
                     return (<div key={index} className='flex md-lg:flex-col justify-start gap-2'>
-                        {el.map((p, j) => <Link key={j} className='flex justify-start items-start' to='#'>
-                            <img className='w-[110px] rounded-md sm:w-full h-[110px]' src={p.images[0]} alt="" />
+                        {el.map((e, j) => <Link key={j} className='flex justify-start items-start' to='#'>
+                            <img className='w-[110px] rounded-md sm:w-full h-[110px]' src={e.images[0]} alt="" />
                             <div className='flex flex-col justify-start items-start px-3 gap-1'>
-                                <h2>{p.name}</h2>
-                                <span className=' text-lg text-[#CD8D7A] font-semibold'>{formatMoney(p.price)}đ</span>
+                                <h2>{e.name}</h2>
+                                <span className=' text-lg text-[#CD8D7A] font-semibold'>{formatMoney(e.price)}đ</span>
                             </div>
                         </Link>)}
                     </div>)

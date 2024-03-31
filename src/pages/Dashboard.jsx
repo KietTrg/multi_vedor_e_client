@@ -54,6 +54,10 @@ const Dashboard = () => {
                                     {/* <span className='text-xl'><BsHeart /></span> */}
                                     <Link to='/dashboard/my-wishlist' className='block'>Wishlist</Link>
                                 </li>
+                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/my-vouchers' ? 'bg-[#eee] text-red-600' : 'text-black'}`}>
+                                    {/* <span className='text-xl'><BsHeart /></span> */}
+                                    <Link to='/dashboard/my-vouchers' className='block'>My Vouchers</Link>
+                                </li>
                                 <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/chat' || pathname === `/dashboard/chat/${sellerId}` ? 'bg-[#eee] text-red-600' : 'text-black'}`}>
                                     {/* <span className='text-xl'><BsChat /></span> */}
                                     <Link to='/dashboard/chat' className='block'>Chat</Link>
@@ -63,7 +67,7 @@ const Dashboard = () => {
                                     {/* <span className='text-xl'><TfiLock /></span> */}
                                     <Link to='/dashboard/change-password' className='block'>Change Password</Link>
                                 </li>
-                                <li onClick={logout} className='flex justify-start items-center gap-2 p-2 cursor-pointer'>
+                                <li onClick={logout} className='flex justify-start items-center gap-2 p-2 cursor-pointer text-black'>
                                     {/* <span className='text-xl'><BiLogInCircle /></span> */}
                                     <div className='block'>Logout</div>
                                 </li>

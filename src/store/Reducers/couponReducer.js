@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
 
 export const applyCoupon = createAsyncThunk(
-  "coupon/deleteCoupon",
+  "coupon/applyCoupon",
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.post(`/apply-coupon`, info, {

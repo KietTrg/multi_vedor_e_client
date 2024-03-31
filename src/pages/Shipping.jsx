@@ -59,7 +59,7 @@ const Shipping = () => {
             <section className='bg-[url("D:\DocumentsUniversity\Study\Multi_vendor_ecommerce\client\src\assets\footer1.jpg")] h-[220px] mt-6 bg-cover relative '>
                 <div className='mx-auto w-full h-full  absolute left-0 top-0 bg-[rgba(0,0,0,0.5)] '>
                     <div className='flex flex-col justify-center items-center gap-1 h-full w-full text-white'>
-                        <h2 className='text-4xl font-semibold mb-2'>Shop Products</h2>
+                        <h2 className='text-4xl font-semibold mb-2'>Place Order</h2>
                         <div className='flex items-center justify-center gap-2 '>
                             <Link to='/'>Home</Link>
                             <span><IoIosArrowForward /></span>

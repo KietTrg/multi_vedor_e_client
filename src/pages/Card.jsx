@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 import { BsShopWindow } from 'react-icons/bs'
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux'
-import { get_card, delete_card, messageClear, quantity_inc, quantity_dec } from '../store/Reducers/cardReducer'
+import { get_card, delete_card, messageClear, quantity_inc, quantity_dec, get_fee } from '../store/Reducers/cardReducer'
 import { formatMoney } from '../../src/store/helpers'
 import toast from 'react-hot-toast'
 import { applyCoupon } from '../store/Reducers/couponReducer'
@@ -17,13 +17,18 @@ const Card = () => {
     const dispatch = useDispatch()
     const { userInfo } = useSelector(state => state.auth)
     const { card_products, successMessage, count, price, shipping_fee, outofstock, buyProductItem } = useSelector(state => state.card)
+    // console.log('count: ', count);
+    // console.log('card_products: ', card_products.map(e => e.products.map((el) => el.quantity)));
+
     const { successMessage: successMessageCoupon, percentCoupon } = useSelector(state => state.coupon)
 
-    console.log('card_products.length: ', card_products.length);
+
+    // console.log('card_products.length: ', card_products.length);
     const [voucher, setVoucher] = useState('')
     // const card_products = [1, 2, 3]
     // const outofstock = [1, 2]
     const redirect = () => {
+
         navigate('/shipping', {
             state: {
                 product: card_products,
@@ -34,8 +39,10 @@ const Card = () => {
             }
         })
     }
+
     useEffect(() => {
         dispatch(get_card(userInfo.id))
+        // dispatch(get_fee())
         console.log('userInfo.id: ', userInfo.id);
     }, [])
     useEffect(() => {
@@ -67,7 +74,7 @@ const Card = () => {
             <section className='bg-[url("D:\DocumentsUniversity\Study\Multi_vendor_ecommerce\client\src\assets\footer1.jpg")] h-[220px] mt-6 bg-cover relative '>
                 <div className='mx-auto w-full h-full  absolute left-0 top-0 bg-[rgba(0,0,0,0.5)] '>
                     <div className='flex flex-col justify-center items-center gap-1 h-full w-full text-white'>
-                        <h2 className='text-4xl font-semibold mb-2'>Shop Products</h2>
+                        <h2 className='text-4xl font-semibold mb-2'>Card</h2>
                         <div className='flex items-center justify-center gap-2 '>
                             <Link to='/'>Home</Link>
                             <span><IoIosArrowForward /></span>
@@ -103,11 +110,14 @@ const Card = () => {
                                                         </div>
                                                     </div>
                                                     <div className='flex items-center justify-between w-6/12 sm:w-full sm:mt-3'>
-                                                        <div className=' pl-4 sm:pl-0'>
+                                                        {e.productInfo.discount !== 0 ? <div className=' pl-4 sm:pl-0'>
                                                             <h2 className=' text-lg text-[#CD8D7A] font-semibold'>{formatMoney(e.productInfo.price - Math.floor((e.productInfo.price * e.productInfo.discount) / 100))} vnđ</h2>
                                                             <p className=' line-through'>{formatMoney(e.productInfo.price)} vnđ</p>
                                                             <p>-{e.productInfo.discount}%</p>
-                                                        </div>
+                                                        </div> : <div className=' pl-4 sm:pl-0'>
+                                                            <h2 className=' text-lg text-[#CD8D7A] font-semibold'>{formatMoney(e.productInfo.price)} vnđ</h2>
+
+                                                        </div>}
                                                         <div className='flex flex-col gap-2'>
                                                             <div className='flex justify-center items-center h-[30px] text-xl text-[#3a4d39]'>
                                                                 <div onClick={() => dec(e.quantity, e._id)} className='px-3 cursor-pointer after:h-[30px] relative after:absolute after:-right-[1px] after:bg-[#3a4d39] after:w-[1px]'>-</div>
@@ -146,7 +156,7 @@ const Card = () => {
                                                             </div>
                                                             <div className='flex flex-col gap-2'>
                                                                 <div className='flex justify-center items-center h-[30px] text-xl text-[#3a4d39]'>
-                                                                    <div className='px-3 cursor-pointer after:h-[30px] relative after:absolute after:-right-[1px] after:bg-[#3a4d39] after:w-[1px]'>-</div>
+                                                                    <div onClick={() => dec(el.quantity, el._id)} className='px-3 cursor-pointer after:h-[30px] relative after:absolute after:-right-[1px] after:bg-[#3a4d39] after:w-[1px]'>-</div>
                                                                     <div className='px-3 '>{el.quantity}</div>
                                                                     <div className='px-3 cursor-pointer after:h-[30px] relative after:absolute after:left-0 after:bg-[#3a4d39] after:w-[1px]'>+</div>
                                                                 </div>

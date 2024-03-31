@@ -1,20 +1,46 @@
 import React, { useEffect } from 'react'
 import product from '../../assets/products.jpg'
-import { Link } from 'react-router-dom'
+import { FaRegHeart } from 'react-icons/fa'
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { PiShoppingBagOpenDuotone } from "react-icons/pi";
+import { Link, useNavigate } from 'react-router-dom'
 import Ratings from '../Ratings'
 import { useDispatch, useSelector } from 'react-redux'
-import { get_wishlists, delete_wishlist, messageClear } from '../../store/Reducers/cardReducer'
+import { get_wishlists, delete_wishlist, messageClear, add_to_card } from '../../store/Reducers/cardReducer'
 import { formatMoney } from '../../store/helpers'
 import toast from 'react-hot-toast'
+import Swal from 'sweetalert2';
 const Wishlist = () => {
-    const dispacth = useDispatch()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { userInfo } = useSelector(state => state.auth)
     const { wishlist, successMessage } = useSelector(state => state.card)
     // console.log('wishlist: ', wishlist);
     const deleteWishlist = (wishlistId) => {
         console.log('wishlistId: ', wishlistId);
-        dispacth(delete_wishlist(wishlistId))
+        dispatch(delete_wishlist(wishlistId))
 
+    }
+    const addToCard = (pid) => {
+        if (userInfo) {
+            dispatch(add_to_card({
+                userId: userInfo.id,
+                quantity: 1,
+                productId: pid
+            }))
+        } else {
+            Swal.fire({
+                title: 'Please Login',
+                text: "Welcome! Please Login to continue.",
+                icon: "info",
+                showCancelButton: true,
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+
+                    navigate('/login')
+                }
+            })
+        }
     }
     useEffect(() => {
         if (successMessage) {
@@ -39,13 +65,13 @@ const Wishlist = () => {
                         <img className='sm:h-full w-full h-[240px]' src={el.image} alt="product image" />
                         <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
                             <li onClick={() => deleteWishlist(el._id)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[720deg] transition-all'>
-                                {/* <AiFillHear /> */}
+                                <FaRegHeart />
                             </li>
                             <Link to={`/product/details/${el.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[720deg] transition-all' >
-                                {/* <FaEye /> */}
+                                <MdOutlineRemoveRedEye />
                             </Link>
-                            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[720deg] transition-all'>
-                                {/* <AiOutlineShoppingCart /> */}
+                            <li onClick={() => addToCard(el._id)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#7fad39] hover:text-white hover:rotate-[720deg] transition-all'>
+                                <PiShoppingBagOpenDuotone />
                             </li>
                         </ul>
                     </div>
