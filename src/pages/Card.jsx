@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { get_card, delete_card, messageClear, quantity_inc, quantity_dec, get_fee } from '../store/Reducers/cardReducer'
 import { formatMoney } from '../../src/store/helpers'
 import toast from 'react-hot-toast'
-import { applyCoupon } from '../store/Reducers/couponReducer'
+import { applyCoupon, messageCouponClear } from '../store/Reducers/couponReducer'
 
 
 const Card = () => {
@@ -20,7 +20,7 @@ const Card = () => {
     // console.log('count: ', count);
     // console.log('card_products: ', card_products.map(e => e.products.map((el) => el.quantity)));
 
-    const { successMessage: successMessageCoupon, percentCoupon } = useSelector(state => state.coupon)
+    const { successMessage: successMessageCoupon, errorMessage, percentCoupon } = useSelector(state => state.coupon)
 
 
     // console.log('card_products.length: ', card_products.length);
@@ -51,6 +51,7 @@ const Card = () => {
             dispatch(messageClear())
             dispatch(get_card(userInfo.id))
         }
+
     }, [successMessage])
     const inc = (quantity, stock, cardId) => {
         const temp = quantity + 1;
@@ -66,8 +67,16 @@ const Card = () => {
     }
     const handleApply = () => {
         // voucher
-        dispatch(applyCoupon({ info: voucher }))
+        dispatch(applyCoupon({ info: voucher, userId: userInfo.id }))
+
     }
+    useEffect(() => {
+        if (successMessageCoupon) {
+            toast.success(successMessageCoupon)
+            dispatch(messageCouponClear())
+        }
+
+    }, [successMessageCoupon])
     return (
         <div>
             <Headers />
@@ -188,6 +197,7 @@ const Card = () => {
                                             <input onChange={(e) => setVoucher(e.target.value)} value={voucher} className='w-full px-3 py-1 outline-0 bg-[#D0E7D2] rounded-md focus:border-[#3a4d39] border' type="text" placeholder='Input voucher' />
                                             <button onClick={handleApply} className='px-5 py-[1px] bg-[#739072] text-white rounded-md'>Apply</button>
                                         </div>
+                                        {errorMessage ? <span className='text-sm italic text-red-600'>{errorMessage}</span> : ""}
                                         {percentCoupon > 0 && <div className='flex justify-between items-center'>
                                             <span>Discount</span>
                                             <span>{formatMoney(percentCoupon)}%</span>

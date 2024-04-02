@@ -120,6 +120,19 @@ export const addToCoupons = createAsyncThunk(
     }
   }
 );
+// export const updateExpireVoucher = createAsyncThunk(
+//   "coupon/updateExpireVoucher",
+//   async (userId, { rejectWithValue, fulfillWithValue }) => {
+//     try {
+//       const { data } = await api.post("/home/update-expire-voucher", userId, {
+//         withCredentials: true,
+//       });
+//       return fulfillWithValue(data);
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
 export const homeReducer = createSlice({
   name: "home",
   initialState: {

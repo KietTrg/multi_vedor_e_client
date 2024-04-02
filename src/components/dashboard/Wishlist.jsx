@@ -45,12 +45,12 @@ const Wishlist = () => {
     useEffect(() => {
         if (successMessage) {
             toast.success(successMessage)
-            dispacth(messageClear())
-            dispacth(get_wishlists(userInfo.id))
+            dispatch(messageClear())
+            dispatch(get_wishlists(userInfo.id))
         }
     })
     useEffect(() => {
-        dispacth(get_wishlists(userInfo.id))
+        dispatch(get_wishlists(userInfo.id))
     }, [])
     return (
         <div className='w-full grid grid-cols-4 md-lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6'>

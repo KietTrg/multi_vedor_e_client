@@ -3,9 +3,27 @@ import api from "../../api/api";
 
 export const applyCoupon = createAsyncThunk(
   "coupon/applyCoupon",
-  async (info, { rejectWithValue, fulfillWithValue }) => {
+  async ({ info, userId }, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.post(`/apply-coupon`, info, {
+      const { data } = await api.post(
+        `/apply-coupon`,
+        { info, userId },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("data: ", data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const getVoucherCustomer = createAsyncThunk(
+  "coupon/getVoucherCustomer",
+  async (userId, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/home/get-voucher-customer/${userId}`, {
         withCredentials: true,
       });
       return fulfillWithValue(data);
@@ -27,7 +45,7 @@ export const couponReducer = createSlice({
     percentCoupon: 0,
   },
   reducers: {
-    messageClear: (state, _) => {
+    messageCouponClear: (state, _) => {
       state.errorMessage = "";
       state.successMessage = "";
     },
@@ -45,7 +63,11 @@ export const couponReducer = createSlice({
       state.successMessage = payload.message;
       state.percentCoupon = payload.percentCoupon;
     });
+    builder.addCase(getVoucherCustomer.fulfilled, (state, { payload }) => {
+      state.totalCoupon = payload.getAllVoucherByCustomerCount;
+      state.coupons = payload.getAllVoucherByCustomer;
+    });
   },
 });
-export const { messageClear } = couponReducer.actions;
+export const { messageCouponClear } = couponReducer.actions;
 export default couponReducer.reducer;
