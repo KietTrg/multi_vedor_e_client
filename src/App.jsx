@@ -24,6 +24,9 @@ import Chat from './components/dashboard/Chat';
 import ConfirmOrder from './pages/ConfirmOrder';
 import { useLocation } from 'react-router-dom'
 import MyVouchers from './components/dashboard/MyVouchers';
+import ComingSoon from './pages/ComingSoon';
+import About from './pages/About';
+import Contact from './pages/Contact';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -43,6 +46,9 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/' element={<Home />} />
         <Route path='/shops' element={<Shops />} />
+        <Route path='/blog' element={<ComingSoon />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/products?' element={<CategoryShops />} />
         <Route path='/products/search?' element={<SearchProducts />} />
         <Route path='/card' element={<Card />} />

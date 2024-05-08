@@ -41,6 +41,13 @@ const Home = () => {
             </div>
             <div className=' py-10'>
                 <div className='w-[85%] flex flex-wrap mx-auto'>
+                    <div className='w-full'>
+                        <div className='text-center flex justify-between items-center text-4xl text-[#3A4D39] relative pb-[45px]'>
+                            <div className='w-[35%] h-[2px] bg-[#3A4D39] mt-2'></div>
+                            <h2>General Products</h2>
+                            <div className='w-[35%] h-[2px] bg-[#3A4D39] mt-2'></div>
+                        </div>
+                    </div>
                     <div className=' grid w-full grid-row-3 gap-7'>
                         <div className=' overflow-hidden'>
                             <Products title='Latest Product' products={latesProducts} />

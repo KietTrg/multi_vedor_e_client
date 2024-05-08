@@ -87,7 +87,7 @@ const FeatureProducts = ({ products }) => {
             <div className='w-full grid grid-cols-4 md-lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6'>
                 {products.map((el, index) => <div key={index} className=' group transition-all cursor-pointer duration-500 hover:shadow-md hover:border-[#3A4D39] rounded-md hover:border hover:-mt-3'>
                     <div className=' relative overflow-hidden'>
-                        <div className='flex justify-center items-center absolute text-white w-[45px] h-[25px] rounded-md bg-[#E6BA95] left-2 top-2'>{el.discount}%</div>
+                        {el.discount > 0 && <div className='flex justify-center items-center absolute text-white w-[45px] h-[25px] rounded-md bg-[#E6BA95] left-2 top-2'>{el.discount}%</div>}
                         <img className=' rounded-md sm:w-full w-full h-[300px]' src={el.images[0]} alt="" />
                         <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
                             <li onClick={() => addToWishlist(el)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#4d664c] hover:text-white hover:rotate-[720deg] transition-all '><FaRegHeart></FaRegHeart></li>

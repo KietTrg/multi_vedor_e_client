@@ -20,13 +20,13 @@ const OrderDetail = () => {
                 <div className='flex flex-col gap-1'>
                     <h2 className='text-slate-600 font-semibold'>Deliver to: {myOrder.shippingInfo?.name}</h2>
                     <p>
-                        <span className='bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded'>Home</span>
+                        <span className='bg-[#739072] text-[#3a4d39] text-xs font-medium mr-2 px-2.5 py-0.5 rounded'>Home</span>
                         <span className='text-slate-600 text-sm'>{myOrder.shippingInfo?.address} {myOrder.shippingInfo?.province} {myOrder.shippingInfo?.city} {myOrder.shippingInfo?.area}</span>
                     </p>
                     <p className='text-slate-600 text-sm font-semibold'>Email to {userInfo.email}</p>
                 </div>
                 <div className='text-slate-600'>
-                    <h2>Price: {formatMoney(myOrder.price)}vnđ include shipping iee</h2>
+                    <h2>Price: {formatMoney(myOrder.price)} vnđ include shipping iee</h2>
                     <p>Pyment status: <span className={`py-[1px] text-xs px-3 ${myOrder.paymentStatus === 'paid' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'} rounded-md `}>{myOrder.paymentStatus}</span></p>
                     <p>Order status: <span className={`py-[1px] text-xs px-3 ${myOrder.deliveryStatus === 'paid' ? 'bg-indigo-100 text-indigo-800' : 'bg-red-100 text-red-800'} rounded-md `}>{myOrder.deliveryStatus}</span></p>
                 </div>
@@ -49,8 +49,13 @@ const OrderDetail = () => {
                                 </div>
                                 <div className='pl-4'>
                                     <h2 className='text-md text-orange-500'>{formatMoney(el.price - Math.floor((el.price * el.discount) / 100))}vnđ</h2>
-                                    <p>{formatMoney(el.price)}vnđ</p>
-                                    <p>-{el.discount}%</p>
+                                    {
+                                        el.discount > 0 &&
+                                        <>
+                                            <p>{formatMoney(el.price)} vnđ</p>
+                                            <p>-{el.discount}%</p>
+                                        </>
+                                    }
                                 </div>
                             </div>
                         </div>)

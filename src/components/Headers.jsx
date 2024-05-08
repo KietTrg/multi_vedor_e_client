@@ -83,13 +83,8 @@ const Headers = () => {
                                 <a href="#"><FaGithub /></a>
                             </div>
                             <div className='flex cursor-pointer group text-slate-800 justify-center  items-center gap-2 relative after:absolute after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] before:absolute before:h-[18px] before:bg-[#afafaf] before:-left-[20px] before:w-[1px] text-sm'>
-                                <span className='text-white' >Language:</span>
-                                <span className='text-white'>English</span>
-                                <FaAngleDown color='#fff' />
-                                <ul className=' absolute invisible transition-all top-6 rounded-md duration-200 p-2 w-[150px] flex flex-col gap-3 text-[#3A4D39] group-hover:visible group-hover:bg-gray-200 group-hover:top-12 z-10'>
-                                    <li>VietName</li>
-                                    <li>English</li>
-                                </ul>
+                                <Link to='http://localhost:3000/login' target="_blank" className='text-white' >Kênh người bán</Link>
+
                             </div>
                             {
                                 userInfo ? <Link className='flex items-center justify-center gap-2 cursor-pointer text-sm' to='/dashboard'>
@@ -127,13 +122,13 @@ const Headers = () => {
                                         <Link to='/shops' className={`p-2 block ${pathname === '/shops' ? 'text-[#618264] border-b-2 border-b-[#618264] ' : 'text-black'}`}>Shop</Link>
                                     </li>
                                     <li>
-                                        <Link className={`p-2 block ${pathname === '/blog' ? 'text-[#618264] border-b-2 border-b-[#618264] ' : 'text-black'}`}>Blog</Link>
+                                        <Link to='/blog' className={`p-2 block ${pathname === '/blog' ? 'text-[#618264] border-b-2 border-b-[#618264] ' : 'text-black'}`}>Blog</Link>
                                     </li>
                                     <li>
-                                        <Link className={`p-2 block ${pathname === '/about' ? 'text-[#618264] border-b-2 border-b-[#618264] ' : 'text-black'}`}>About</Link>
+                                        <Link to='/about' className={`p-2 block ${pathname === '/about' ? 'text-[#618264] border-b-2 border-b-[#618264] ' : 'text-black'}`}>About</Link>
                                     </li>
                                     <li>
-                                        <Link className={`p-2 block ${pathname === '/contact' ? 'text-[#618264] border-b-2 border-b-[#618264] ' : 'text-black'}`}>Contact</Link>
+                                        <Link to='/contact' className={`p-2 block ${pathname === '/contact' ? 'text-[#618264] border-b-2 border-b-[#618264] ' : 'text-black'}`}>Contact</Link>
                                     </li>
                                 </ul>
                                 <div className='flex md-lg:hidden justify-center items-center gap-5'>

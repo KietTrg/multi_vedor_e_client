@@ -43,7 +43,7 @@ const ChangePassword = () => {
                     <input onChange={(e) => setNewPass(e.target.value)} value={newPass} type="password" id='new_password' name='new_password' placeholder='new password' className='outline-none px-3 py-1 border rounded-md text-slate-600' />
                 </div>
                 <div>
-                    <button className='px-8 py-2 bg-purple-500 shadow-lg hover:shadow-purple-500/30 text-white rounded-md'>Update</button>
+                    <button className='px-8 py-2 bg-[#81a080] shadow-lg hover:bg-[#3a4d39] text-white rounded-md'>Update</button>
                 </div>
             </form>
         </div>

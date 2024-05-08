@@ -18,8 +18,7 @@ const Footer = () => {
             dispatch(get_wishlists(userInfo?.id))
         }
     }, [])
-    // const wishlist_count = 4
-    // const card_product_count = 4
+
     return (
         <footer>
             <div className=' w-full  md-lg:pb-10 sm:pb-6'>
@@ -34,6 +33,7 @@ const Footer = () => {
                                         <li>Address: Ninh Kieu, Can Tho</li>
                                         <li>Phone: 0704875988</li>
                                         <li>Email: Kietb2016977@student.ctu.edu.vn</li>
+                                        <Link to='http://localhost:3000/register' target="_blank" >Đăng kí bán hàng</Link>
                                     </ul>
                                 </div>
                                 <div className=' col-span-1 pt-12'>

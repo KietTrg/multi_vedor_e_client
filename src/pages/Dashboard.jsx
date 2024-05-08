@@ -42,28 +42,28 @@ const Dashboard = () => {
                     <div className='py-5 flex md-lg:w-[90%] mx-auto relative'>
                         <div className={` rounded-md z-[99999] md-lg:absolute ${filterShow ? '-left-4' : '-left-[360px]'} w-[270px] ml-4 bg-white`}>
                             <ul className='py-2 text-slate-600 px-4'>
-                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard' ? 'bg-[#eee] text-red-700' : 'text-black'}`}>
+                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard' ? 'bg-[#eee] text-green-700' : 'text-black'}`}>
                                     {/* <span className='text-xl'><RxDashboard /></span> */}
                                     <Link to='/dashboard' className='block'>Dashboard</Link>
                                 </li>
-                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/my-orders' ? 'bg-[#eee] text-red-600' : 'text-black'}`}>
+                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/my-orders' ? 'bg-[#eee] text-green-600' : 'text-black'}`}>
                                     {/* <span className='text-xl'><RiProductHuntLine /></span> */}
                                     <Link to='/dashboard/my-orders' className='block'>My Orders</Link>
                                 </li>
-                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/my-wishlist' ? 'bg-[#eee] text-red-600' : 'text-black'}`}>
+                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/my-wishlist' ? 'bg-[#eee] text-green-600' : 'text-black'}`}>
                                     {/* <span className='text-xl'><BsHeart /></span> */}
                                     <Link to='/dashboard/my-wishlist' className='block'>Wishlist</Link>
                                 </li>
-                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/my-vouchers' ? 'bg-[#eee] text-red-600' : 'text-black'}`}>
+                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/my-vouchers' ? 'bg-[#eee] text-green-600' : 'text-black'}`}>
                                     {/* <span className='text-xl'><BsHeart /></span> */}
-                                    <Link to='/dashboard/my-vouchers' className='block'>My Vouchers</Link>
+                                    <Link to='/dashboard/my-vouchers' className='block'>My Coupons</Link>
                                 </li>
-                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/chat' || pathname === `/dashboard/chat/${sellerId}` ? 'bg-[#eee] text-red-600' : 'text-black'}`}>
+                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/chat' || pathname === `/dashboard/chat/${sellerId}` ? 'bg-[#eee] text-green-600' : 'text-black'}`}>
                                     {/* <span className='text-xl'><BsChat /></span> */}
                                     <Link to='/dashboard/chat' className='block'>Chat</Link>
                                 </li>
 
-                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/change-password' ? 'bg-[#eee] text-red-600' : 'text-black'}`}>
+                                <li className={`flex justify-start items-center gap-2 p-2 cursor-pointer ${pathname === '/dashboard/change-password' ? 'bg-[#eee] text-green-600' : 'text-black'}`}>
                                     {/* <span className='text-xl'><TfiLock /></span> */}
                                     <Link to='/dashboard/change-password' className='block'>Change Password</Link>
                                 </li>

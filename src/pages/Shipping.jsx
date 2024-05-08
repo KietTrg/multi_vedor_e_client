@@ -114,7 +114,7 @@ const Shipping = () => {
                                                         <input onChange={inputHandle} value={state.area} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='area' placeholder='area' id='province' />
                                                     </div>
                                                     <div className='flex flex-col gap-1 mt-3 w-full'>
-                                                        <button className='px-3 py-[6px] rounded-sm hover:shadow-indigo-500/20 hover:shadow-lg bg-indigo-500 text-white'>Save</button>
+                                                        <button className='px-3 py-[6px] rounded-sm bg-[#739072] shadow-lg hover:bg-[#3a4d39] text-white'>Save</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -124,9 +124,9 @@ const Shipping = () => {
                                         res && <div className='flex flex-col gap-1'>
                                             <h2 className='text-slate-600 font-semibold pb-2'>Deliver to Kiet Truong</h2>
                                             <p>
-                                                <span className='bg-blue-200 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded'>Home</span>
+                                                <span className='bg-[#739072] text-[#3a4d39] text-xs font-medium mr-2 px-2.5 py-0.5 rounded'>Home</span>
                                                 <span className='text-slate-600 text-sm'>{state?.address} {state?.province} {state?.city} {state?.area}</span>
-                                                <span onClick={() => setRes(false)} className='text-indigo-500 cursor-pointer'> change</span>
+                                                <span onClick={() => setRes(false)} className='text-[#3a4d39] cursor-pointer'> change</span>
                                             </p>
                                             <p className='text-slate-600 text-sm'>Email to kietb2016977@student.ctu.edu.vn</p>
                                         </div>
@@ -155,10 +155,14 @@ const Shipping = () => {
                                                 <div className='flex items-center justify-end w-6/12 sm:w-full sm:mt-3'>
                                                     <div className=' pl-4 sm:pl-0'>
                                                         <h2 className=' text-lg text-[#CD8D7A] font-semibold'>{formatMoney(e.productInfo.price - Math.floor((e
-                                                            .productInfo.price * e.productInfo.discount) / 100))} vnd</h2>
-                                                        <p className=' line-through'>{formatMoney(e
-                                                            .productInfo.price)} vnd</p>
-                                                        <p>-{e.productInfo.discount}%</p>
+                                                            .productInfo.price * e.productInfo.discount) / 100))} vnđ</h2>
+                                                        {
+                                                            e.productInfo.discount > 0 &&
+                                                            <>
+                                                                <p className=' line-through'>{formatMoney(e.productInfo.price)} vnđ</p>
+                                                                <p>-{e.productInfo.discount}%</p>
+                                                            </>
+                                                        }
                                                     </div>
 
                                                 </div>
@@ -176,19 +180,12 @@ const Shipping = () => {
                                         <span>Price: ({items} items)</span>
                                         <span>{formatMoney(oldPrice)} vnđ</span>
                                     </div>
-                                    {/* <div className='flex justify-between items-center'>
-                                        <span>Delivery Fee</span>
-                                        <span>{formatMoney(shipping_fee)} vnđ</span>
-                                    </div> */}
-                                    {/* <div className='flex justify-between items-center'>
-                                        <span>Total Payment</span>
-                                        <span>{formatMoney(price)} vnđ</span>
-                                    </div> */}
+
                                     <div className='flex justify-between items-center'>
                                         <span>Total</span>
                                         <span>{formatMoney(price)} vnđ</span>
                                     </div>
-                                    <button onClick={placeOrder} disabled={res ? false : true} className={`px-5 py-[6px] rounded-sm hover:shadow-orange-500/20 hover:shadow-lg ${res ? 'bg-orange-500' : 'bg-orange-300'} text-sm text-white uppercase`}>Place Order</button>
+                                    <button onClick={placeOrder} disabled={res ? false : true} className={`px-5 py-[6px] rounded-sm  ${!res ? 'bg-[#adc2ac] ' : 'bg-[#3a4d39]'} text-sm text-white uppercase`}>Place Order</button>
                                 </div>
                             </div>
                         </div>

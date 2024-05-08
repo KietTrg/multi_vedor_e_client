@@ -194,7 +194,7 @@ const Card = () => {
                                             <span>{formatMoney(shipping_fee)} vnđ</span>
                                         </div>
                                         <div className='flex gap-2'>
-                                            <input onChange={(e) => setVoucher(e.target.value)} value={voucher} className='w-full px-3 py-1 outline-0 bg-[#D0E7D2] rounded-md focus:border-[#3a4d39] border' type="text" placeholder='Input voucher' />
+                                            <input onChange={(e) => setVoucher(e.target.value)} value={voucher} className='w-full px-3 py-1 outline-0 bg-[#D0E7D2] rounded-md focus:border-[#3a4d39] border' type="text" placeholder='Code coupon' />
                                             <button onClick={handleApply} className='px-5 py-[1px] bg-[#739072] text-white rounded-md'>Apply</button>
                                         </div>
                                         {errorMessage ? <span className='text-sm italic text-red-600'>{errorMessage}</span> : ""}

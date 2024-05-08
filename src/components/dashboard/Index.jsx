@@ -10,10 +10,10 @@ const Index = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { userInfo } = useSelector(state => state.auth)
-    const { totalOrder, pendingOrder, cancelledOrder, recentOrder } = useSelector(state => state.dashboard)
-    // console.log('cancelledOrder: ', cancelledOrder);
-    // console.log('pendingOrder: ', pendingOrder);
-    // console.log('totalOrder: ', totalOrder);
+    const { totalOrder, recentOrder } = useSelector(state => state.dashboard)
+    const { wishlist_count } = useSelector(state => state.card)
+    const { totalCoupon } = useSelector(state => state.coupon)
+
 
     useEffect(() => {
         dispatch(get_data(userInfo.id))
@@ -54,7 +54,7 @@ const Index = () => {
                         </span>
                     </div>
                     <div className='flex flex-col justify-start items-start text-slate-600'>
-                        <h2 className='text-3xl font-bold'>{pendingOrder}</h2>
+                        <h2 className='text-3xl font-bold'>{wishlist_count}</h2>
                         <span>Total WishList</span>
                     </div>
                 </div>
@@ -65,8 +65,8 @@ const Index = () => {
                         </span>
                     </div>
                     <div className='flex flex-col justify-start items-start text-slate-600'>
-                        <h2 className='text-3xl font-bold'>{cancelledOrder}</h2>
-                        <span>Total Voucher</span>
+                        <h2 className='text-3xl font-bold'>{totalCoupon}</h2>
+                        <span>Total Coupon</span>
                     </div>
                 </div>
             </div>

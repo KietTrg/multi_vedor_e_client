@@ -175,18 +175,7 @@ const Details = () => {
     return (
         <div>
             <Headers />
-            {/* <div className='bg-[url("D:\DocumentsUniversity\Study\Multi_vendor_ecommerce\client\src\assets\footer1.jpg")] h-[220px] mt-6 bg-cover relative '>
-                <div className='mx-auto w-full h-full  absolute left-0 top-0 bg-[rgba(0,0,0,0.5)] '>
-                    <div className='flex flex-col justify-center items-center gap-1 h-full w-full text-white'>
-                        <h2 className='text-4xl font-semibold mb-2'>Shop Products</h2>
-                        <div className='flex items-center justify-center gap-2 '>
-                            <Link to='/'>Home</Link>
-                            <span><IoIosArrowForward /></span>
-                            <span className='text-[#739072]'>Products</span>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+
             <div className='bg-slate-100 py-4 my-5'>
                 <div className='w-[85%] md:w-[85%] sm:w-[90%] lg:w-[90%] h-full mx-auto'>
                     <div className='flex justify-start items-center text-md text-[#3a4d39] w-full'>
@@ -285,8 +274,8 @@ const Details = () => {
                         <div className='w-[72%] md-lg:w-full'>
                             <div className='pr-4 md-lg:pr-0'>
                                 <div className='grid grid-cols-2'>
-                                    <button onClick={() => setState('reviews')} className={`py-1 px-5 hover:bg-green-500 ${state === 'reviews' ? 'bg-green-500 text-white' : 'bg-slate-200 text-[#3a4d39]'}`}>Reviews</button>
-                                    <button onClick={() => setState('description')} className={`py-1 px-5 hover:bg-green-500 ${state === 'description' ? 'bg-green-500 text-white' : 'bg-slate-200 text-[#3a4d39]'}`}>Description</button>
+                                    <button onClick={() => setState('reviews')} className={`py-1 px-5 hover:bg-[#b2d3b0] ${state === 'reviews' ? 'bg-[#739072] text-white' : 'bg-slate-200 text-[#3a4d39]'}`}>Reviews</button>
+                                    <button onClick={() => setState('description')} className={`py-1 px-5 hover:bg-[#b2d3b0] ${state === 'description' ? 'bg-[#739072] text-white' : 'bg-slate-200 text-[#3a4d39]'}`}>Description</button>
                                 </div>
                                 <div>
                                     {state === 'reviews' ? <Reviews product={product}></Reviews> : <p className='py-5 text-[#3a4d39] '>'{product.description}'</p>}

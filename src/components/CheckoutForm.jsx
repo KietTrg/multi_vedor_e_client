@@ -37,7 +37,7 @@ const CheckoutForm = ({ orderId }) => {
             // onChange={(e) => setEmail(e.target.value)}
             />
             <PaymentElement id='payment-element' options={paymentElementOpt} />
-            <button disabled={isLoading || !stripe || !elements} id='submit' className='px-10 py-[6px] bg-green-800'>
+            <button disabled={isLoading || !stripe || !elements} id='submit' className='mt-1 px-10 py-[6px] bg-[#739072] w-full'>
                 <span id='button-text'>{
                     isLoading ? <div>Loading...</div> : "Pay Now"
                 }</span>
